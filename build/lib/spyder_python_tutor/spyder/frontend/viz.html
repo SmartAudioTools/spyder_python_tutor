@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+  Hote de l'ExecutionVisualizer d'Online Python Tutor, EMBARQUE dans le dock
+  Spyder (widgets/main_widget.py, via QWebEngineView + serveur HTTP local).
+
+  Frontend = bundle d'embarquement OFFICIEL v5-unity (build/pytutor-embed.bundle.js) :
+  un seul fichier webpack, tout inclus (jQuery, d3, jsPlumb, CSS injecte), qui
+  expose le global addVisualizerToPage(trace, divId, params). Il CORRESPOND au
+  backend v5 (pg_logger/pg_encoder) — meme format de trace — et gere reellement
+  hideCode:true (la v3, elle, l'assert : d'ou l'ancien « Assertion Failure »).
+
+  - renderTrace(obj) est appele par le Python apres chargement : il instancie le
+    visualiseur avec hideCode:true (le code source reste dans l'editeur Spyder) et
+    garde l'instance dans window.viz pour piloter l'avancement.
+  - Le Python commande les pas : window.viz.curInstr = N; window.viz.updateOutput();
+    Les controles integres d'OPT (#vcrControls) sont masques par CSS : c'est la
+    barre d'outils Qt du dock qui pilote.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* Masquer les controles de navigation integres d'OPT (id ou classe selon la
+       version) : c'est la barre Qt du dock qui pilote l'avancement. */
+    #vcrControls, .vcrControls { display: none !important; }
+
+    body { margin: 0; padding: 4px; }
+  </style>
+  <script src="js/pytutor-embed.bundle.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="viz"></div>
+  <script>
+    // Instancie (ou reinstancie) le visualiseur avec la trace fournie par Python.
+    // addVisualizerToPage(trace, divId, params) retourne l'ExecutionVisualizer.
+    function renderTrace(traceObj) {
+      var container = document.getElementById('viz');
+      container.innerHTML = '';
+      window.viz = addVisualizerToPage(traceObj, 'viz', {
+        startingInstruction: 0,
+        hideCode: true
+      });
+      return true;
+    }
+  </script>
+</body>
+</html>

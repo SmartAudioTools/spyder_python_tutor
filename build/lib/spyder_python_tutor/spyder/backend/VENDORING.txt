@@ -1,0 +1,41 @@
+VENDORING DU BACKEND ONLINE PYTHON TUTOR (pg_logger)
+=====================================================
+
+Ce dossier doit contenir le backend de trace d'Online Python Tutor (OPT), qui
+n'est PAS une dependance PyPI installable proprement : on le vendore (copie dans
+le depot) pour le figer et le lancer avec le python du venv Spyder.
+
+Source
+------
+Depot : Online Python Tutor, dossier v5-unity/backend/ (ou v3/ selon la version
+retenue). Miroirs GitHub (le depot d'origine pgbovine/OnlinePythonTutor est
+archive) :
+    https://github.com/pgbovine/OnlinePythonTutor        (origine, archive)
+    https://github.com/aphirak/visualization-online-python-tutor
+
+Fichiers a deposer ICI (dans backend/)
+--------------------------------------
+    pg_logger.py       point d'entree : exec_script_str_local(...) sous bdb
+    pg_encoder.py      encodage de l'etat (pile/tas) au format trace JSON
+    (+ tout module importe par pg_logger.py dans cette version : selon les
+     versions, un util.py ou des helpers — verifier les imports en tete de
+     pg_logger.py et copier ce qui manque, jusqu'a ce que run_trace.py importe
+     sans ImportError.)
+
+Le driver run_trace.py (deja present) ajoute ce dossier a sys.path et appelle
+pg_logger. Il tente exec_script_str_local() puis, en repli, exec_script_str() :
+adapter si la version choisie expose une autre signature.
+
+LICENCE — A VERIFIER AVANT DE COMMITER
+--------------------------------------
+OPT est distribue sous licence libre (de type BSD/GPL selon les fichiers).
+AVANT de committer le code vendore dans le depot Mercurial SmartOS :
+  1. relever la licence exacte des fichiers copies (en-tete + fichier LICENSE) ;
+  2. deposer une copie de cette licence a cote (backend/LICENSE-OPT.txt) ;
+  3. verifier la compatibilite avec la redistribution dans ce depot.
+
+Test rapide apres vendoring
+---------------------------
+    cd <ce_dossier>
+    <python_du_venv_Spyder> run_trace.py /chemin/petit_exemple.py /tmp/t.json
+    # doit ecrire /tmp/t.json = {"code": "...", "trace": [ ... ]}

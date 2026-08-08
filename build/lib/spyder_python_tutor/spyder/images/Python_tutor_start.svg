@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="32"
+   height="32"
+   viewBox="0 0 23.999999 23.999999"
+   preserveAspectRatio="xMidYMid"
+   id="svg2"
+   sodipodi:docname="Python_tutor_start.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="pt"
+     inkscape:zoom="15.198795"
+     inkscape:cx="10.52715"
+     inkscape:cy="16.48157"
+     inkscape:window-width="1969"
+     inkscape:window-height="1050"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g4" />
+  <g
+     transform="matrix(0.1,0,0,-0.1,-1,160.41714)"
+     fill="#000000"
+     stroke="none"
+     id="g2">
+    <g
+       id="g4"
+       transform="matrix(0.14567574,0,0,0.14567574,76.147285,1366.5348)">
+      <path
+         d="M 173,1295 C 100,1279 73,1266 66,1243 50,1193 10,972 10,936 10,894 29,855 83,787 l 30,-39 -7,-336 C 100,136 96,74 84,67 76,63 70,46 70,30 V 0 h 69 c 43,0 72,5 78,13 6,6 23,137 39,291 20,202 32,280 42,283 7,3 15,4 17,2 2,-2 16,-125 31,-274 15,-148 31,-280 35,-292 8,-21 15,-23 84,-23 70,0 75,1 75,22 0,12 -9,31 -20,43 -20,21 -20,33 -18,513 l 3,492 75,-50 75,-50 170,2 170,3 3,37 c 3,34 0,38 -25,44 -15,4 -34,11 -40,17 -7,5 -27,7 -45,4 -18,-2 -67,0 -108,5 l -75,10 -90,89 c -88,87 -92,89 -169,109 -90,23 -183,25 -273,5 z"
+         id="path2"
+         style="fill:#40b3c0;stroke:none;fill-opacity:1" />
+      <ellipse
+         style="fill:#40b3c0;fill-opacity:1;stroke:none;stroke-width:7.5"
+         id="path3"
+         cx="313.33832"
+         cy="-1475.0676"
+         transform="scale(1,-1)"
+         rx="106.77229"
+         ry="129.10374" />
+      <path
+         style="fill:#40b3c0;fill-opacity:1;stroke:none;stroke-width:3.5;stroke-dasharray:none;stroke-opacity:1"
+         d="m 970.2997,1044.1857 -32.17654,7.0277 128.79634,350.212 4.9905,-1.0286"
+         id="path4"
+         sodipodi:nodetypes="cccc" />
+    </g>
+  </g>
+</svg>

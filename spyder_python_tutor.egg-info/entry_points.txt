@@ -1,0 +1,2 @@
+[spyder.plugins]
+python_tutor = spyder_python_tutor.spyder.plugin:PythonTutorPlugin
