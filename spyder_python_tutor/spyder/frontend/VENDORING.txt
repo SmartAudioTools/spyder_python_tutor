@@ -1,0 +1,64 @@
+VENDORING DU FRONTEND ONLINE PYTHON TUTOR (bundle d'embarquement v5)
+====================================================================
+
+viz.html attend UN SEUL fichier : js/pytutor-embed.bundle.js, le bundle officiel
+d'embarquement d'Online Python Tutor (OPT). Rien n'est charge depuis un CDN : la
+page est servie en local a QWebEngineView.
+
+Source
+------
+Depot OPT, fichier v5-unity/build/pytutor-embed.bundle.js. Miroirs GitHub (le
+depot d'origine pgbovine/OnlinePythonTutor est archive) :
+    https://github.com/pgbovine/OnlinePythonTutor
+    https://github.com/aphirak/visualization-online-python-tutor
+
+Fichier a deposer ICI
+---------------------
+    js/pytutor-embed.bundle.js   (~1,1 Mo)
+
+C'est un bundle webpack TOUT-EN-UN : jQuery, jQuery UI, d3, jsPlumb, qtip et le
+CSS sont inclus et injectes par le bundle lui-meme. Aucun autre js/ ni css/ n'est
+necessaire (ne PAS recreer les dossiers css/ ou une liste de <script>).
+
+API utilisee par viz.html
+-------------------------
+Le bundle expose le global :
+
+    addVisualizerToPage(trace, divId, params)   -> retourne l'ExecutionVisualizer
+
+viz.html appelle :
+
+    window.viz = addVisualizerToPage(obj, 'viz', {startingInstruction: 0,
+                                                  hideCode: true});
+
+puis le Python pilote l'avancement par :
+
+    window.viz.curInstr = N; window.viz.updateOutput();
+
+⚠ POURQUOI LA v5 ET PAS LA v3
+-----------------------------
+La v3 (pytutor.js + une dizaine de libs separees) a ete essayee puis ABANDONNEE :
+son ExecutionVisualizer fait  assert(!this.params.hideCode)  et signale l'echec par
+alert("Assertion Failure (see console log for backtrace)") des qu'on demande
+hideCode:true — c'est-a-dire exactement ce dont ce greffon a besoin (le code source
+reste dans l'editeur Spyder, pas dans le dock). La v5 gere reellement hideCode
+(c'est meme ce que montre son propre demo, v5-unity/pytutor-embed-demo-simple.html)
+et son format de trace CORRESPOND au backend v5 vendore dans backend/.
+
+⚠ NE PAS RETIRER L'INTERCEPTION DE alert()
+------------------------------------------
+Le greffon surcharge javaScriptAlert (widgets/main_widget.py). Un alert() ouvre un
+dialogue MODAL depuis l'interieur d'un runJavaScript() ; cette re-entrance a fait
+planter tout Spyder (SIGSEGV dans libQt6WebEngineCore). C'est un garde-fou, pas du
+confort.
+
+Verification apres vendoring
+----------------------------
+Au lancement du greffon, le dock doit afficher le schema memoire (pile/tas/fleches)
+SANS panneau de code et SANS les controles de navigation d'OPT (masques par CSS
+#vcrControls) : seuls les boutons de la barre d'outils Qt pilotent l'avancement.
+
+LICENCE
+-------
+OPT est sous licence MIT (Philip J. Guo) : la redistribution vendoree est autorisee
+en conservant l'avis de copyright. Copie dans LICENSE-OPT.txt, a cote de ce fichier.

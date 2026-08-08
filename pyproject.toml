@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spyder-python-tutor"
+version = "0.1.0"
+description = "Python Tutor dans Spyder : trace le fichier courant, visualise l'execution pas a pas (pile/tas/fleches) et surligne la ligne dans l'editeur"
+requires-python = ">=3.9"
+# pg_logger (backend) et pytutor.js (frontend) sont VENDORES dans le depot
+# (backend/ et frontend/), pas des dependances PyPI : voir les VENDORING.txt.
+dependencies = ["qtpy", "qtawesome"]
+
+# Spyder decouvre les greffons tiers par ce groupe de points d'entree. Le nom du
+# point d'entree DOIT etre identique a l'attribut NAME de la classe, sinon Spyder
+# leve une SpyderAPIError et ignore le greffon (spyder/app/find_plugins.py).
+[project.entry-points."spyder.plugins"]
+python_tutor = "spyder_python_tutor.spyder.plugin:PythonTutorPlugin"
+
+[tool.setuptools.packages.find]
+include = ["spyder_python_tutor*"]
+
+# Sans cette declaration, une roue pip n'embarquerait NI le bundle JS de Python Tutor
+# (1,1 Mo), NI viz.html, NI les SVG, NI MEME les .py du backend vendore : backend/ et
+# frontend/ n'ont pas de __init__.py (code vendore, pas des paquets), donc packages.find
+# les ignore entierement — le greffon s'installerait et resterait inerte. Tout est donc
+# declare comme DONNEES du paquet spyder_python_tutor.spyder, ce qui les livre au meme
+# emplacement relatif (le code resout tout par __file__). Sans effet sur le mecanisme
+# .pth des machines SmartOS — indispensable des qu'on construit une vraie roue
+# (distribution SmartPythonEditor).
+[tool.setuptools.package-data]
+"spyder_python_tutor.spyder" = [
+    "images/*.svg",
+    "backend/*.py", "backend/*.txt",
+    "frontend/viz.html", "frontend/*.txt", "frontend/js/*.js",
+]
