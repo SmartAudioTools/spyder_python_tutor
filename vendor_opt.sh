@@ -25,7 +25,7 @@
 set -o pipefail
 
 PLUGIN="$(dirname "$(realpath "${BASH_SOURCE[0]}")")/spyder_python_tutor/spyder"
-VENV_PY="/DATA/Python/SmartPython/CachyOS/versions/Spyder/bin/python"
+VENV_PY="/DATA/Python/SmartPython/CachyOS/versions/SmartPythonEditor/bin/python"
 SRC="/tmp/opt-src"
 REPO="https://github.com/aphirak/visualization-online-python-tutor"
 
